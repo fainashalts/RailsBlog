@@ -1,6 +1,9 @@
 class PostsController < ApplicationController
   before_action :find_post, only: [:edit, :update, :show, :destroy]
-
+  #This authenticates admin whenever a post is to be created, updated or destroyed.
+  before_action :authenticate_admin!, except: [:index, :show]
+  before_action :check_admin_status, except: [:index, :show]
+  
   # Index action to render all posts
   def index
     @posts = Post.all
@@ -61,5 +64,12 @@ class PostsController < ApplicationController
 
   def find_post
     @post = Post.find(params[:id])
+  end
+
+  def check_admin_status
+    unless current_admin.admin?
+      redirect_to root_path
+      return false
+    end
   end
 end

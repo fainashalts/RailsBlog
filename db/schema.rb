@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171123181545) do
+ActiveRecord::Schema.define(version: 20171128052311) do
+
+# Could not dump table "admins" because of following StandardError
+#   Unknown type 'false' for column 'default'
 
   create_table "ckeditor_assets", force: :cascade do |t|
     t.string "data_file_name", null: false
